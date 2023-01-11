@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package hive
+package za.co.absa.hyperdrive.hive.jobs
 
 import org.apache.spark.sql.SparkSession
 import org.apache.commons.configuration2.builder.BasicConfigurationBuilder
