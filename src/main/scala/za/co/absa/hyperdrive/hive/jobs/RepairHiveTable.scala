@@ -18,7 +18,6 @@ package za.co.absa.hyperdrive.hive.jobs
 import org.apache.spark.sql.SparkSession
 import org.apache.commons.configuration2.builder.BasicConfigurationBuilder
 import org.apache.commons.configuration2.builder.fluent.Parameters
-import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler
 import org.apache.commons.configuration2.{BaseConfiguration, Configuration}
 import org.slf4j.LoggerFactory
 
@@ -45,7 +44,6 @@ object RepairHiveTableConfiguration {
   private val logger = LoggerFactory.getLogger(this.getClass)
 
   private val PropertyDelimiter = "="
-  private val ListDelimiter = ','
 
   private val TableName = "table"
   private val HiveMetastoreUris = "hive.metastore.uris"
@@ -63,9 +61,7 @@ object RepairHiveTableConfiguration {
 
   private def parseConfiguration(settings: Array[String]): Configuration = {
     val configuration = new BasicConfigurationBuilder[BaseConfiguration](classOf[BaseConfiguration])
-      .configure(new Parameters()
-        .basic()
-        .setListDelimiterHandler(new DefaultListDelimiterHandler(ListDelimiter)))
+      .configure(new Parameters().basic())
       .getConfiguration
 
     settings.foreach(setOrThrow(_, configuration))
