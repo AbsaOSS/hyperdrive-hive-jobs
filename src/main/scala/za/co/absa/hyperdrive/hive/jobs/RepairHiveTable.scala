@@ -32,9 +32,9 @@ object RepairHiveTable {
       .enableHiveSupport()
       .getOrCreate()
 
-    logger.info(s"Going to repair hive table: ${repairHiveTableConfiguration.tableName} in ${repairHiveTableConfiguration.hiveMetastoreUris}")
+    logger.info(s"Going to recover partitions for hive table: ${repairHiveTableConfiguration.tableName} in ${repairHiveTableConfiguration.hiveMetastoreUris}")
 
-    spark.sql(s"MSCK REPAIR TABLE ${repairHiveTableConfiguration.tableName}")
+    spark.sql(s"ALTER TABLE ${repairHiveTableConfiguration.tableName} RECOVER PARTITIONS")
   }
 }
 
